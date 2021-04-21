@@ -36,7 +36,7 @@ export default function StateResults(props) {
         setGopNumber(newNumberGopResult)
     }
 
-    let demColor = demWon === true ? "deepbluesky" : "peachpuff"
+    let demColor = demWon === true ? "#00bfff" : "peachpuff"
     let gopColor = gopWon === true ? "lightcoral" : "peachpuff"
 
     let demText = demWon === true ? "bold" : "none"
@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
         alignItems: "center",
         borderWidth: 2,
         backgroundColor: "peachpuff",
-        width: 125,
+        width: 150,
         marginTop: 10,
         marginLeft: 10,
         marginRight: 10,

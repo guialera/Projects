@@ -1,25 +1,24 @@
 import { StatusBar } from "expo-status-bar"
 import React, { useState } from "react"
-import { SafeAreaView, View, Text, StyleSheet } from "react-native"
-
-import StateResults from "./StateResults.js"
+import { SafeAreaView, View, Text, StyleSheet, Button } from "react-native"
 
 import axios from "axios"
+
+import StateResults from "./StateResults.js"
 
 export default function Results() {
 
     const [electionResultsYear, setElectionResultsYear] = useState([])
 
-    React.useEffect(() => {
-        getElectionResultsByYear(2020)
-        console.log("useEffect")
-    }, [])
-//172.25.45.163
+    //172.25.45.163
     function getElectionResultsByYear(electionYear) {
         axios.get(`http://172.25.45.163:9000/results/${electionYear}`)
             .then(response => {
-                setElectionResultsYear(response.data)
-                console.log("Request Got")
+                let results = response.data
+                results.sort(function (a, b) {
+                    return a.state.localeCompare(b.state)
+                })
+                setElectionResultsYear(results)
             })
             .catch(error => console.log(error))
     }
@@ -61,6 +60,24 @@ export default function Results() {
 
     return (
         <SafeAreaView>
+            <View style={styles.buttonContainer}>
+                <Button
+                    title="2020"
+                    onPress={() => getElectionResultsByYear(2020)}
+                />
+                <Button
+                    title="2016"
+                    onPress={() => getElectionResultsByYear(2016)}
+                />
+                <Button
+                    title="2012"
+                    onPress={() => getElectionResultsByYear(2012)}
+                />
+                <Button
+                    title="2008"
+                    onPress={() => getElectionResultsByYear(2008)}
+                />
+            </View>
             <View style={styles.container}>
                 {singleStateResults}
             </View>
@@ -70,7 +87,13 @@ export default function Results() {
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: "dodgerblue",
+        backgroundColor: "azure",
+        flexDirection: "row",
+        flexWrap: "wrap",
+        justifyContent: "space-evenly"
+    },
+    buttonContainer: {
+        backgroundColor: "azure",
         flexDirection: "row",
         flexWrap: "wrap",
         justifyContent: "space-evenly"

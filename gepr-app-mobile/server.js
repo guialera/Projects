@@ -6,7 +6,8 @@ var cors = require('cors')
 
 app.use(cors())
 //mongodb+srv://guialera:gar1990129381@cluster0.zlxrl.mongodb.net/gepr-database?retryWrites=true&w=majority
-mongoose.connect("mongodb://localhost:27017/fs-final-project", {
+//mongodb://localhost:27017/fs-final-project
+mongoose.connect("mongodb+srv://guialera:gar1990129381@cluster0.zlxrl.mongodb.net/gepr-database?retryWrites=true&w=majority", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,
