@@ -1,10 +1,28 @@
 import { StatusBar } from "expo-status-bar"
-import React from "react"
+import React, { useState } from "react"
 import { SafeAreaView, View, Text, StyleSheet } from "react-native"
 
 import StateResults from "./StateResults.js"
 
+import axios from "axios"
+
 export default function Results() {
+
+    const [electionResultsYear, setElectionResultsYear] = useState([])
+
+    React.useEffect(() => {
+        getElectionResultsByYear(2020)
+        console.log("useEffect")
+    }, [])
+//172.25.45.163
+    function getElectionResultsByYear(electionYear) {
+        axios.get(`http://172.25.45.163:9000/results/${electionYear}`)
+            .then(response => {
+                setElectionResultsYear(response.data)
+                console.log("Request Got")
+            })
+            .catch(error => console.log(error))
+    }
 
     let allResults = [
         {
@@ -39,7 +57,7 @@ export default function Results() {
         }
     ]
 
-    let singleStateResults = allResults.map(each => <StateResults {...each} />)
+    let singleStateResults = electionResultsYear.map(each => <StateResults {...each} />)
 
     return (
         <SafeAreaView>
