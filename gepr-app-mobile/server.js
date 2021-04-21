@@ -5,9 +5,8 @@ const morgan = require("morgan")
 var cors = require('cors')
 
 app.use(cors())
-//mongodb+srv://guialera:gar1990129381@cluster0.zlxrl.mongodb.net/gepr-database?retryWrites=true&w=majority
-//mongodb://localhost:27017/fs-final-project
-mongoose.connect("mongodb+srv://guialera:gar1990129381@cluster0.zlxrl.mongodb.net/gepr-database?retryWrites=true&w=majority", {
+
+mongoose.connect("mongodb://localhost:27017/fs-final-project", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,
