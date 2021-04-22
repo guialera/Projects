@@ -56,7 +56,7 @@ export default function Results() {
         }
     ]
 
-    let singleStateResults = electionResultsYear.map(each => <StateResults {...each} />)
+    let singleStateResults = electionResultsYear.map(each => <StateResults key={each._id} {...each} />)
 
     return (
         <SafeAreaView>
@@ -96,6 +96,8 @@ const styles = StyleSheet.create({
         backgroundColor: "azure",
         flexDirection: "row",
         flexWrap: "wrap",
-        justifyContent: "space-evenly"
+        justifyContent: "space-evenly",
+        marginTop: 25,
+        marginBottom: 25
     }
 })
