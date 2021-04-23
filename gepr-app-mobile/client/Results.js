@@ -1,62 +1,62 @@
 import { StatusBar } from "expo-status-bar"
 import React, { useState } from "react"
-import { SafeAreaView, View, Text, StyleSheet, Button } from "react-native"
+import { SafeAreaView, View, Text, StyleSheet, Button, ScrollView, Alert } from "react-native"
 
 import axios from "axios"
 
 import StateResults from "./StateResults.js"
+import StateButton from "./StateButton.js"
 
 export default function Results() {
 
-    const [electionResultsYear, setElectionResultsYear] = useState([])
+    const [allStates, setAllStates] = useState([])
+    const [singleState, setSingleState] = useState([])
+    const [showSingleState, setShowSingleState] = useState(false)
+    const [showAllStates, setShowAllStates] = useState(true)
+    const [showFoundState, setShowFoundState] = useState(false)
 
     //172.25.45.163
+    //http://172.25.45.163:9000/results/${electionYear}
     function getElectionResultsByYear(electionYear) {
-        axios.get(`http://172.25.45.163:9000/results/${electionYear}`)
+        axios.get(`https://us-east-1.aws.webhooks.mongodb-realm.com/api/client/v2.0/app/gepr-app-mobile-fzadj/service/gepr-api/incoming_webhook/gepr-api-${electionYear}`)
             .then(response => {
                 let results = response.data
                 results.sort(function (a, b) {
                     return a.state.localeCompare(b.state)
                 })
-                setElectionResultsYear(results)
+                setAllStates(results)
+                setShowAllStates(true)
+                setShowSingleState(false)
+                setShowFoundState(false)
             })
             .catch(error => console.log(error))
     }
 
-    let allResults = [
-        {
-            _id: "60496fb1460e900753aa1b42",
-            electionYear: 2020,
-            state: "Alabama",
-            demWon: false,
-            gopWon: true,
-            candidateDem: "Joe Biden",
-            candidateGop: "Donald Trump",
-            percentDemResult: 36.57,
-            numberDemResult: 849624,
-            percentGopResult: 62.03,
-            numberGopResult: 1441170,
-            marginOfVictory: 25.46,
-            electoralVotes: 9,
-        },
-        {
-            _id: "60496ff8460e900753aa1b43",
-            electionYear: 2020,
-            state: "Alaska",
-            demWon: false,
-            gopWon: true,
-            candidateDem: "Joe Biden",
-            candidateGop: "Donald Trump",
-            percentDemResult: 42.77,
-            numberDemResult: 153778,
-            percentGopResult: 52.83,
-            numberGopResult: 189951,
-            marginOfVictory: 10.06,
-            electoralVotes: 3,
-        }
-    ]
+    function displayStates() {
+        setShowAllStates(true)
+        setShowSingleState(false)
+        setShowFoundState(false)
+    }
 
-    let singleStateResults = electionResultsYear.map(each => <StateResults key={each._id} {...each} />)
+    function displaySingleState() {
+        setShowAllStates(false)
+        setShowSingleState(true)
+        setShowFoundState(false)
+    }
+
+    function showState(id) {
+        let displayState = allStates.find(each => each._id.$oid === id)
+        setSingleState([displayState])
+        setShowSingleState(false)
+        setShowAllStates(false)
+        setShowFoundState(true)
+    }
+
+    let singleStateResults = singleState.map(each => <StateResults key={each._id.$oid} {...each} />)
+
+    let allStateResults = allStates.map(each => <StateResults key={each._id.$oid} {...each} />)
+
+    let stateButton = allStates.map(each => <StateButton key={each._id.$oid} id={each._id.$oid} state={each.state} showState={showState} />)
 
     return (
         <SafeAreaView>
@@ -78,20 +78,54 @@ export default function Results() {
                     onPress={() => getElectionResultsByYear(2008)}
                 />
             </View>
-            <View style={styles.container}>
-                {singleStateResults}
+            <View>
+                <Button
+                    title="View Single State"
+                    onPress={displaySingleState}
+                />
             </View>
+            <View>
+                <Button
+                    title="View All States"
+                    onPress={displayStates}
+                />
+            </View>
+            <ScrollView>
+                <View style={styles.stateButtonsContainer, {
+                    display: showSingleState ? "block" : "none",
+                    flexDirection: "row",
+                    flexWrap: "wrap",
+                    justifyContent: "space-evenly"
+                }}>
+                    {stateButton}
+                </View>
+            </ScrollView>
+            <ScrollView>
+                <View style={styles.statesContainer, {
+                    display: showAllStates ? "block" : "none",
+                    backgroundColor: "azure",
+                    flexDirection: "row",
+                    flexWrap: "wrap",
+                    justifyContent: "space-evenly",
+                    height: 4250
+                }}>
+                    {allStateResults}
+                </View>
+                <View style={styles.statesContainer, {
+                    display: showFoundState ? "block" : "none",
+                    backgroundColor: "azure",
+                    flexDirection: "row",
+                    flexWrap: "wrap",
+                    justifyContent: "space-evenly",
+                }}>
+                    {singleStateResults}
+                </View>
+            </ScrollView>
         </SafeAreaView>
     )
 }
 
 const styles = StyleSheet.create({
-    container: {
-        backgroundColor: "azure",
-        flexDirection: "row",
-        flexWrap: "wrap",
-        justifyContent: "space-evenly"
-    },
     buttonContainer: {
         backgroundColor: "azure",
         flexDirection: "row",
@@ -99,5 +133,17 @@ const styles = StyleSheet.create({
         justifyContent: "space-evenly",
         marginTop: 25,
         marginBottom: 25
-    }
+    },
+    /*stateButtonsContainer: {
+        flexDirection: "row",
+        flexWrap: "wrap",
+        justifyContent: "space-evenly"
+    },
+    statesContainer: {
+        backgroundColor: "azure",
+        flexDirection: "row",
+        flexWrap: "wrap",
+        justifyContent: "space-evenly",
+        height: 4250
+    },*/
 })

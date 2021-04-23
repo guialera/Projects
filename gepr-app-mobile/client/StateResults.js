@@ -30,8 +30,8 @@ export default function StateResults(props) {
     } = props
 
     function addCommas() {
-        let newNumberDemResult = Number(numberDemResult).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-        let newNumberGopResult = Number(numberGopResult).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+        let newNumberDemResult = Number(numberDemResult.$numberInt).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+        let newNumberGopResult = Number(numberGopResult.$numberInt).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
         setDemNumber(newNumberDemResult)
         setGopNumber(newNumberGopResult)
     }
@@ -50,23 +50,23 @@ export default function StateResults(props) {
                     backgroundColor: demColor,
                     width: "100%",
                     fontWeight: demText,
-                    textAlign: "center"
+                    alignItems: "center"
                 }}>
                     <Text>{candidateDem}</Text>
                     <Text>{demNumber}</Text>
-                    <Text>{percentDemResult}%</Text>
+                    <Text>{percentDemResult.$numberDouble}%</Text>
                 </View>
                 <View style={{
                     backgroundColor: gopColor,
                     width: "100%",
                     fontWeight: gopText,
-                    textAlign: "center"
+                    alignItems: "center"
                 }}>
                     <Text>{candidateGop}</Text>
                     <Text>{gopNumber}</Text>
-                    <Text>{percentGopResult}%</Text>
+                    <Text>{percentGopResult.$numberDouble}%</Text>
                 </View>
-                <Text>{electoralVotes} Electoral Votes</Text>
+                <Text>{electoralVotes.$numberInt} Electoral Votes</Text>
             </View>
         </SafeAreaView>
     )
