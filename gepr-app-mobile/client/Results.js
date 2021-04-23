@@ -14,6 +14,7 @@ export default function Results() {
     const [showSingleState, setShowSingleState] = useState(false)
     const [showAllStates, setShowAllStates] = useState(true)
     const [showFoundState, setShowFoundState] = useState(false)
+    const [electionYear, setElectionYear] = useState()
 
     //172.25.45.163
     //http://172.25.45.163:9000/results/${electionYear}
@@ -28,6 +29,7 @@ export default function Results() {
                 setShowAllStates(true)
                 setShowSingleState(false)
                 setShowFoundState(false)
+                setElectionYear(electionYear)
             })
             .catch(error => console.log(error))
     }
@@ -56,7 +58,7 @@ export default function Results() {
 
     let allStateResults = allStates.map(each => <StateResults key={each._id.$oid} {...each} />)
 
-    let stateButton = allStates.map(each => <StateButton key={each._id.$oid} id={each._id.$oid} state={each.state} showState={showState} />)
+    let stateButton = allStates.map(each => <StateButton key={each._id.$oid} id={each._id.$oid} state={each.state} demWon={each.demWon} showState={showState} />)
 
     return (
         <SafeAreaView>
@@ -64,18 +66,22 @@ export default function Results() {
                 <Button
                     title="2020"
                     onPress={() => getElectionResultsByYear(2020)}
+                    color="white"
                 />
                 <Button
                     title="2016"
                     onPress={() => getElectionResultsByYear(2016)}
+                    color="white"
                 />
                 <Button
                     title="2012"
                     onPress={() => getElectionResultsByYear(2012)}
+                    color="white"
                 />
                 <Button
                     title="2008"
                     onPress={() => getElectionResultsByYear(2008)}
+                    color="white"
                 />
             </View>
             <View>
@@ -88,14 +94,19 @@ export default function Results() {
                 <Button
                     title="View All States"
                     onPress={displayStates}
+                    color="lightcoral"
                 />
+            </View>
+            <View style={styles.electionYearContainer}>
+                <Text style={styles.electionYearText}>{electionYear} General Election</Text>
             </View>
             <ScrollView>
                 <View style={styles.stateButtonsContainer, {
                     display: showSingleState ? "block" : "none",
                     flexDirection: "row",
                     flexWrap: "wrap",
-                    justifyContent: "space-evenly"
+                    justifyContent: "space-evenly",
+                    height: 750
                 }}>
                     {stateButton}
                 </View>
@@ -107,7 +118,7 @@ export default function Results() {
                     flexDirection: "row",
                     flexWrap: "wrap",
                     justifyContent: "space-evenly",
-                    height: 4250
+                    height: 4350
                 }}>
                     {allStateResults}
                 </View>
@@ -127,7 +138,7 @@ export default function Results() {
 
 const styles = StyleSheet.create({
     buttonContainer: {
-        backgroundColor: "azure",
+        backgroundColor: "lightcoral",
         flexDirection: "row",
         flexWrap: "wrap",
         justifyContent: "space-evenly",
@@ -138,7 +149,17 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         flexWrap: "wrap",
         justifyContent: "space-evenly"
+    },*/
+    electionYearContainer: {
+        marginTop: 10,
+        marginBottom: 10
     },
+    electionYearText: {
+        fontWeight: "500",
+        fontSize: 20,
+        textAlign: "center"
+    }
+    /*
     statesContainer: {
         backgroundColor: "azure",
         flexDirection: "row",

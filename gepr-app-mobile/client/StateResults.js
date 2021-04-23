@@ -39,8 +39,8 @@ export default function StateResults(props) {
     let demColor = demWon === true ? "#00bfff" : "peachpuff"
     let gopColor = gopWon === true ? "lightcoral" : "peachpuff"
 
-    let demText = demWon === true ? "bold" : "none"
-    let gopText = gopWon === true ? "bold" : "none"
+    let demText = demWon === true ? "bold" : "normal"
+    let gopText = gopWon === true ? "bold" : "normal"
 
     return (
         <SafeAreaView>
@@ -49,22 +49,20 @@ export default function StateResults(props) {
                 <View style={{
                     backgroundColor: demColor,
                     width: "100%",
-                    fontWeight: demText,
                     alignItems: "center"
                 }}>
-                    <Text>{candidateDem}</Text>
-                    <Text>{demNumber}</Text>
-                    <Text>{percentDemResult.$numberDouble}%</Text>
+                    <Text style={{fontWeight: demText}}>{candidateDem}</Text>
+                    <Text style={{fontWeight: demText}}>{demNumber}</Text>
+                    <Text style={{fontWeight: demText}}>{percentDemResult.$numberDouble}%</Text>
                 </View>
                 <View style={{
                     backgroundColor: gopColor,
                     width: "100%",
-                    fontWeight: gopText,
                     alignItems: "center"
                 }}>
-                    <Text>{candidateGop}</Text>
-                    <Text>{gopNumber}</Text>
-                    <Text>{percentGopResult.$numberDouble}%</Text>
+                    <Text style={{fontWeight: gopText}}>{candidateGop}</Text>
+                    <Text style={{fontWeight: gopText}}>{gopNumber}</Text>
+                    <Text style={{fontWeight: gopText}}>{percentGopResult.$numberDouble}%</Text>
                 </View>
                 <Text>{electoralVotes.$numberInt} Electoral Votes</Text>
             </View>

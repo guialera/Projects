@@ -6,8 +6,11 @@ export default function StateButton(props) {
     const {
         id,
         state,
-        showState
+        showState,
+        demWon
     } = props
+
+    let textColor = demWon === true ? "#00bfff" : "lightcoral"
 
     return (
         <SafeAreaView>
@@ -15,6 +18,7 @@ export default function StateButton(props) {
                 <Button
                     title={state}
                     onPress={() => showState(id)}
+                    color={textColor}
                 ></Button>
             </View>
         </SafeAreaView>
