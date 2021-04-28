@@ -39,6 +39,21 @@ function Search() {
         setInput(emptyForm)
     }
 
+    function getUpdatedSearchInput() {
+        console.log(searchValue)
+        if (searchValue !== "") {
+            let updatedSearchMovie = searchValue
+            let updatedSearchString = searchValue.replace(/\s+/g, '-')
+            setSearchValue(updatedSearchMovie)
+            setInitialResults([])
+            axios.get(`http://www.omdbapi.com/?apikey=be90a238&s=${updatedSearchString}`)
+                .then(response => setInitialResults(response.data.Search))
+                .catch(error => console.log(error))
+        } else if (searchValue === "") {
+            setInitialResults([])
+        }
+    }
+
     function addToNomList(title, year, imdbID) {
         let nominated = {
             title: title,
@@ -50,6 +65,13 @@ function Search() {
         storedList.length === 6 ? setInitialResults([]) : console.log()
         storedList.length === 6 ? setSearchValue("") : localStorage.setItem("nominatedList", JSON.stringify(storedList))
         setShowResetButton(true)
+        checkFullList(storedList)
+    }
+
+    function checkFullList(storedList) {
+        storedList.length === 5 ? setFullNomination(true) : setFullNomination(false)
+        storedList.length === 5 ? setInitialResults([]) : console.log()
+        storedList.length === 5 ? setSearchValue("") : console.log()
     }
 
     function removeFromNomList(id) {
@@ -59,6 +81,7 @@ function Search() {
         localStorage.setItem("nominatedList", JSON.stringify(newList))
         setNominatedList(newList)
         newList.length !== 0 ? setShowResetButton(true) : setShowResetButton(false)
+        getUpdatedSearchInput()
     }
 
     function resetList() {
@@ -66,6 +89,7 @@ function Search() {
         localStorage.removeItem("nominatedList")
         setShowResetButton(false)
         setFullNomination(false)
+        getUpdatedSearchInput()
     }
 
     let list = initialResults.map(each => <SingleResults key={each.imdbID} nominatedList={nominatedList} addToNomList={addToNomList} removeFromNomList={removeFromNomList} {...each} />)
