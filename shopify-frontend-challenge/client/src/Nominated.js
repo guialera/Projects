@@ -16,8 +16,8 @@ function Nominated(props) {
     return (
         <div>
             <h2>Title: {title}</h2>
-            <p>Year: {year}</p>
-            <button onClick={sendData}>Remove Nomination</button>
+            <p><b>Year:</b> {year}</p>
+            <button style={{ backgroundColor: "red" }} onClick={sendData}>Remove Nomination</button>
         </div>
     )
 }

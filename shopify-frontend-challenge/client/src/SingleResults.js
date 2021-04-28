@@ -35,18 +35,18 @@ function SingleResults(props) {
     return (
         <div>
             <h2>Title: {Title}</h2>
-            <p>Year: {Year}</p>
+            <p><b>Year:</b> {Year}</p>
             <button
                 value={imdbID}
                 onClick={sendDataAdd}
-                style={{ display: alreadyNominated ? "none" : "block" }}
+                style={{ display: alreadyNominated ? "none" : "block", backgroundColor: "green", marginLeft: "auto", marginRight: "auto" }}
             >
                 Nominate Film
             </button>
             <button
                 value={imdbID}
                 onClick={sendDataRemove}
-                style={{ display: alreadyNominated ? "block" : "none" }}
+                style={{ display: alreadyNominated ? "block" : "none", backgroundColor: "red", marginLeft: "auto", marginRight: "auto" }}
             >
                 Remove Nomination
             </button>

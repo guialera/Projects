@@ -1,0 +1,143 @@
+body{
+    margin: 0;
+    margin-bottom: 20px;
+    background-color: azure;
+}
+
+p{
+    font-size: 15px;
+}
+
+input{
+    margin-right: 6px;
+}
+
+button{
+    background-color: black;
+    color: white;
+    border: none;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-left: 8px;
+    padding-right: 8px;
+}
+
+.topHeader{
+    background-color: dodgerblue;
+    text-align: center;
+    font-size: 30px;
+    margin-top: 0;
+}
+
+.header{
+    background-color: aqua;
+    margin-top: 0px;
+}
+
+.searchContainer{
+    text-align: center;
+}
+
+.resultsNomContainer{
+    display: flex;
+    flex-direction: row;
+    flex-flow: wrap;
+    justify-content: space-evenly;
+}
+
+.resultsList{
+    background-color: navajowhite;
+    text-align: center;
+    border-style: solid;
+    border-color: black;
+    width: 500px;
+    height: 1150px;
+    margin-right: 20px;
+}
+
+.buttonDiv{
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.nomList{
+    background-color: navajowhite;
+    text-align: center;
+    border-style: solid;
+    border-color: black;
+    width: 500px;
+    height: 1150px;
+    margin-left: 20px;
+}
+
+@media(max-width: 1200px){
+
+    .resultsList{
+        margin-right: 0px;
+    }
+
+    .nomList{
+        margin-left: 0px;
+    }
+}
+
+@media(max-width: 1000px){
+
+    .resultsNomContainer{
+        display: flex;
+        flex-direction: column;
+        flex-flow: wrap;
+        justify-content: center;
+    }
+
+    .resultsList{
+        margin-top: 10px;
+        margin-bottom: 10px;
+        margin-right: 0px;
+    }
+
+    .nomList{
+        margin-top: 10px;
+        margin-bottom: 10px;
+        margin-left: 0px;
+    }
+}
+
+@media(max-width: 500px){
+
+    .resultsList{
+        width: 400px;
+    }
+
+    .nomList{
+        width: 400px;
+    }
+}
+
+@media(max-width: 499px){
+
+    .resultsList{
+        width: 350px;
+        height: 1350px;
+    }
+
+    .nomList{
+        width: 350px;
+        height: 1350px;
+    }
+
+}
+
+@media(max-width: 325px){
+
+    .resultsList{
+        width: 300px;
+        height: 1370px;
+    }
+
+    .nomList{
+        width: 300px;
+        height: 1370px;
+    }
+
+}
