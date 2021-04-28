@@ -21,6 +21,7 @@ function Search() {
         setNominatedList(JSON.parse(localStorage.getItem("nominatedList")) || [])
         let initialList = JSON.parse(localStorage.getItem("nominatedList")) || []
         initialList.length !== 0 ? setShowResetButton(true) : setShowResetButton(false)
+        initialList.length === 5 ? setFullNomination(true) : setFullNomination(false)
     }, [])
 
     function fillIn(event) {
@@ -39,9 +40,9 @@ function Search() {
         setInput(emptyForm)
     }
 
-    function getUpdatedSearchInput() {
-        console.log(searchValue)
-        if (searchValue !== "") {
+    function getUpdatedSearchInput(id) {
+        let foundResult = initialResults.filter(each => each.imdbID === id)
+        if (foundResult.length === 1) {
             let updatedSearchMovie = searchValue
             let updatedSearchString = searchValue.replace(/\s+/g, '-')
             setSearchValue(updatedSearchMovie)
@@ -81,7 +82,7 @@ function Search() {
         localStorage.setItem("nominatedList", JSON.stringify(newList))
         setNominatedList(newList)
         newList.length !== 0 ? setShowResetButton(true) : setShowResetButton(false)
-        getUpdatedSearchInput()
+        getUpdatedSearchInput(id)
     }
 
     function resetList() {
@@ -110,7 +111,7 @@ function Search() {
                 </form>
             </div>
             <div className="resultsNomContainer">
-                <div className="resultsList">
+                <div className="resultsList" style={{ height: initialResults.length === 0 ? 500 : "auto" }}>
                     <div style={{ display: fullNomination ? "block" : "none" }}>
                         <h1 className="header">Nomination List Full!</h1>
                     </div>
@@ -119,7 +120,7 @@ function Search() {
                         {list}
                     </div>
                 </div>
-                <div className="nomList">
+                <div className="nomList" style={{ height: nominatedList.length === 0 ? 500 : "auto" }}>
                     <h1 className="header">Nominated Movies</h1>
                     {nominated}
                     <button style={{

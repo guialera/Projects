@@ -51,8 +51,9 @@ button{
     border-style: solid;
     border-color: black;
     width: 500px;
-    height: 1200px;
+    /*height: 1200px;*/
     margin-right: 20px;
+    padding-bottom: 15px;
 }
 
 .buttonDiv{
@@ -66,8 +67,9 @@ button{
     border-style: solid;
     border-color: black;
     width: 500px;
-    height: 1200px;
+    /*height: 1200px;*/
     margin-left: 20px;
+    padding-bottom: 15px;
 }
 
 @media(max-width: 1200px){
@@ -107,12 +109,12 @@ button{
 
     .resultsList{
         width: 400px;
-        height: 1650px;
+        /*height: 1650px;*/
     }
 
     .nomList{
         width: 400px;
-        height: 1650px;
+        /*height: 1650px;*/
     }
 }
 
@@ -120,12 +122,12 @@ button{
 
     .resultsList{
         width: 350px;
-        height: 1650px;
+        /*height: 1650px;*/
     }
 
     .nomList{
         width: 350px;
-        height: 1650px;
+        /*height: 1650px;*/
     }
 
 }
@@ -134,12 +136,12 @@ button{
 
     .resultsList{
         width: 300px;
-        height: 1650px;
+        /*height: 1650px;*/
     }
 
     .nomList{
         width: 300px;
-        height: 1650px;
+        /*height: 1650px;*/
     }
 
 }
