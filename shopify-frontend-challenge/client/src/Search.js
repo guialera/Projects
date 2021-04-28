@@ -26,7 +26,6 @@ function Search() {
     function fillIn(event) {
         const { name, value } = event.target
         setInput(prevInput => ({ ...prevInput, [name]: value }))
-        console.log(input)
     }
 
     function getSearchInput(event) {
