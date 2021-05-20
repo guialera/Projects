@@ -47,24 +47,42 @@ export default function StateResults(props) {
             <View style={styles.stateContainer}>
                 <Text style={styles.stateHeader}>{state}</Text>
                 <View style={{
+                  borderBottomColor: "black",
+                  borderBottomWidth: 1,
+                  alignSelf: "stretch"
+                }}>
+                </View>
+                <View style={{
                     backgroundColor: demColor,
                     width: "100%",
                     alignItems: "center"
                 }}>
-                    <Text style={{fontWeight: demText}}>{candidateDem}</Text>
-                    <Text style={{fontWeight: demText}}>{demNumber}</Text>
-                    <Text style={{fontWeight: demText}}>{percentDemResult.$numberDouble}%</Text>
+                    <Text style={{fontWeight: demText, lineHeight: 25}}>{candidateDem}</Text>
+                    <Text style={{fontWeight: demText, lineHeight: 25}}>{demNumber} Votes</Text>
+                    <Text style={{fontWeight: demText, lineHeight: 25}}>{percentDemResult.$numberDouble}%</Text>
+                </View>
+                <View style={{
+                  borderBottomColor: "black",
+                  borderBottomWidth: 1,
+                  alignSelf: "stretch"
+                }}>
                 </View>
                 <View style={{
                     backgroundColor: gopColor,
                     width: "100%",
                     alignItems: "center"
                 }}>
-                    <Text style={{fontWeight: gopText}}>{candidateGop}</Text>
-                    <Text style={{fontWeight: gopText}}>{gopNumber}</Text>
-                    <Text style={{fontWeight: gopText}}>{percentGopResult.$numberDouble}%</Text>
+                    <Text style={{fontWeight: gopText, lineHeight: 25}}>{candidateGop}</Text>
+                    <Text style={{fontWeight: gopText, lineHeight: 25}}>{gopNumber} Votes</Text>
+                    <Text style={{fontWeight: gopText, lineHeight: 25}}>{percentGopResult.$numberDouble}%</Text>
                 </View>
-                <Text>{electoralVotes.$numberInt} Electoral Votes</Text>
+                <View style={{
+                  borderBottomColor: "black",
+                  borderBottomWidth: 1,
+                  alignSelf: "stretch"
+                }}>
+                </View>
+                <Text style={{lineHeight: 25}}>{electoralVotes.$numberInt} Electoral Votes</Text>
             </View>
         </SafeAreaView>
     )
@@ -77,13 +95,12 @@ const styles = StyleSheet.create({
         alignItems: "center",
         borderWidth: 2,
         backgroundColor: "peachpuff",
-        width: 150,
+        width: 175,
         marginTop: 10,
         marginLeft: 10,
         marginRight: 10,
-        marginTop: 6,
         marginBottom: 6,
-        paddingBottom: 10
+        paddingBottom: 0
     },
     stateHeader: {
         backgroundColor: "aqua",

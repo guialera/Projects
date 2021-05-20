@@ -118,7 +118,7 @@ export default function Results() {
                     flexDirection: "row",
                     flexWrap: "wrap",
                     justifyContent: "space-evenly",
-                    height: 4350
+                    paddingBottom: 250
                 }}>
                     {allStateResults}
                 </View>
