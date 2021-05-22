@@ -4,7 +4,7 @@
     "slug": "GEPR-App-Mobile",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/gepr.png",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
