@@ -16,8 +16,6 @@ export default function Results() {
     const [showFoundState, setShowFoundState] = useState(false)
     const [electionYear, setElectionYear] = useState()
 
-    //172.25.45.163
-    //http://172.25.45.163:9000/results/${electionYear}
     function getElectionResultsByYear(electionYear) {
         axios.get(`https://us-east-1.aws.webhooks.mongodb-realm.com/api/client/v2.0/app/gepr-app-mobile-fzadj/service/gepr-api/incoming_webhook/gepr-api-${electionYear}`)
             .then(response => {
