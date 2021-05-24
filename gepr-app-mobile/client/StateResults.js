@@ -1,11 +1,13 @@
 import { StatusBar } from "expo-status-bar"
 import React, { useState } from "react"
-import { SafeAreaView, View, Text, StyleSheet } from "react-native"
+import { SafeAreaView, View, Text, StyleSheet, Dimensions } from "react-native"
 
 export default function StateResults(props) {
 
     const [demNumber, setDemNumber] = useState()
     const [gopNumber, setGopNumber] = useState()
+
+    let size = Dimensions.get("screen").width
 
     React.useEffect(() => {
         addCommas()
@@ -42,10 +44,36 @@ export default function StateResults(props) {
     let demText = demWon === true ? "bold" : "normal"
     let gopText = gopWon === true ? "bold" : "normal"
 
+    let containerSize = size > 400 ? 175 : 165
+
+    let stateContainer = {
+      borderStyle: "solid",
+      borderColor: "black",
+      alignItems: "center",
+      borderWidth: 2,
+      backgroundColor: "peachpuff",
+      width: containerSize,
+      marginTop: 10,
+      marginLeft: 10,
+      marginRight: 10,
+      marginBottom: 6,
+      paddingBottom: 0
+    }
+
+    let stateHeader = {
+      backgroundColor: "aqua",
+      fontSize: 18,
+      textAlign: "center",
+      fontWeight: "bold",
+      width: "100%",
+      marginTop: 0,
+      marginBottom: 0
+    }
+
     return (
         <SafeAreaView>
-            <View style={styles.stateContainer}>
-                <Text style={styles.stateHeader}>{state}</Text>
+            <View style={stateContainer}>
+                <Text style={stateHeader}>{state}</Text>
                 <View style={{
                   borderBottomColor: "black",
                   borderBottomWidth: 1,
@@ -88,7 +116,7 @@ export default function StateResults(props) {
     )
 }
 
-const styles = StyleSheet.create({
+/*const styles = StyleSheet.create({
     stateContainer: {
         borderStyle: "solid",
         borderColor: "black",
@@ -111,4 +139,4 @@ const styles = StyleSheet.create({
         marginTop: 0,
         marginBottom: 0
     },
-})
+})*/

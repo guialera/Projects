@@ -104,7 +104,7 @@ export default function Results() {
                     flexDirection: "row",
                     flexWrap: "wrap",
                     justifyContent: "space-evenly",
-                    height: 750
+                    paddingBottom: 250
                 }}>
                     {stateButton}
                 </View>
